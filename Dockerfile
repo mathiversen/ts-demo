@@ -1,5 +1,5 @@
 # Builder stage
-FROM rust:latest as builder
+FROM rust:latest AS builder
 
 WORKDIR /usr/src/app
 COPY . .
@@ -15,7 +15,7 @@ RUN useradd -m -U -s /bin/bash appuser
 WORKDIR /app
 
 # Copy the binary from builder
-COPY --from=builder /usr/src/app/target/release/axum-demo /app/
+COPY --from=builder /usr/src/app/target/release/ts-demo /app/
 
 # Set ownership to non-root user
 RUN chown -R appuser:appuser /app
@@ -26,4 +26,4 @@ USER appuser
 # Expose the port the app runs on
 EXPOSE 8000
 
-CMD ["./axum-demo"]
+CMD ["./ts-demo"]
